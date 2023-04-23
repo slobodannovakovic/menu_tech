@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('base_currency_amount');
             $table->string('currency_label')->index();
             $table->unsignedDecimal('currency_amount');
-            $table->unsignedDecimal('exchange rate', 12, 6);
+            $table->unsignedDecimal('exchange_rate', 12, 6);
             $table->unsignedDecimal('surcharge_percentage');
             $table->unsignedDecimal('surcharge_amount');
             $table->timestamps();
