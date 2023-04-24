@@ -1,21 +1,34 @@
 <template>
-  <h1>Currency exchange</h1>
+  <div id="wrapper" class="height-100">
 
-  <form @submit.prevent="submit">
-    <input type="text" v-model="amount" placeholder="Amount">
+    <div class="heading marginBottom-lg">
+      <h1>Currency exchange</h1>
+      <small>Base currency {{ baseCurrency.toUpperCase() }}</small>
+    </div>
 
-    <select>
-      <option v-for="(currency, index) in currencies"
-        :key="index"
-        value="{{ currancy.name }}">
-        {{ currency.label }}
-      </option>
-    </select>
+    <form @submit.prevent="submit">
+      <label>Choose currency to buy</label>
+      <select class="marginBottom" v-model="currencyToBuy">
+        <option v-for="(currency, index) in currencies"
+          :key="index"
+          :value="currency.name">
+          {{ currency.label }}
+        </option>
+      </select><br>
 
-    <span>US$</span><input type="text" v-model="dollars">
+      <label>Enter amount</label>
+      <input type="number"
+        min="1"
+        v-model="currencyToBuyAmount"
+        placeholder="Amount"
+        class="marginBottom"><br>
 
-    <button type="submit">Buy</button>
-  </form>
+      <span>Cost in {{ baseCurrency.toUpperCase() }}</span>
+      <input type="text" v-model="costInBaseCurrency" class="marginBottom"><br>
+
+      <button type="submit">Buy</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -23,21 +36,73 @@
   export default {
     data() {
       return {
-        amount: 1,
-        currencies: [
-          {name: 'gbp', label: 'GBP', exchangeRate: 1.2},
-          {name: 'jpy', label: 'JPY', exchangeRate: 0},
-          {name: 'eur', label: 'EUR', exchangeRate: 0}
-        ],
-        dollars: 100
+        currencies: [],
+        currencyToBuy: 'eur',
+        currencyToBuyAmount: 1,
+        costInBaseCurrency: 0,
+        baseCurrency: 'usd'
       }
+    },
+
+    created() {
+      this.getCurrencies();
     },
 
     methods: {
       submit() {
-        this.dollars = this.amount * this.currencies[0].exchangeRate;
-      }    
+        alert('submitting');
+      },
+
+      getCurrencies() {
+        axios.get('api/currencies')
+          .then(res => {
+            let availableCurrencies = res.data.filter(currency => {
+              return currency.name !== this.baseCurrency;
+            });
+
+            this.currencies = availableCurrencies;
+          });
+      }
     }
   }
 
 </script>
+
+<style>
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    height: 100vh;
+  }
+
+  .height-100 {
+    height: 100%;
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .marginBottom {
+    margin-bottom: 1rem;
+  }
+
+  .marginBottom-lg {
+    margin-bottom: 3rem;
+  }
+
+</style>

@@ -10,7 +10,7 @@
     </head>
     <body class="antialiased">
 
-        <div id="app"></div>
+        <div id="app" class="height-100"></div>
        
         @vite('resources/js/app.js')
     </body>
