@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('exchange_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('base_currency');
-            $table->string('purchase_currency');
+            $table->string('base_currency')->index();
+            $table->string('purchase_currency')->index();
             $table->unsignedDecimal('amount', 12, 6);
             $table->timestamps();
         });
