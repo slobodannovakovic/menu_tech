@@ -24,6 +24,7 @@ class CurrencyControllerTest extends TestCase
         
         $response
             ->assertStatus(200)
+            ->assertJsonIsArray()
             ->assertJsonCount(4);
     }
 }
