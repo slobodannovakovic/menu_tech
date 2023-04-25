@@ -8,7 +8,7 @@
 
     <form @submit.prevent="submit">
       <label>Choose currency to buy</label>
-      <select class="marginBottom" v-model="currencyToBuy" @change="getExchangeRate()">
+      <select class="marginBottom" v-model="currencyToBuy" @change="getCost()">
         <option v-for="(currency, index) in currencies"
           :key="index"
           :value="currency.name">
@@ -20,8 +20,8 @@
       <input type="number"
         min="1"
         v-model="currencyToBuyAmount"
-        @change="getExchangeRate()"
-        @keyup="getExchangeRate($event)"
+        @change="getCost()"
+        @keyup="getCost($event)"
         placeholder="Amount"
         class="marginBottom"><br>
 
@@ -54,7 +54,7 @@
     },
 
     mounted() {
-      this.getExchangeRate();
+      this.getCost();
     },
 
     methods: {
@@ -73,23 +73,18 @@
           });
       },
 
-      getExchangeRate(e) {
+      getCost(e) {
         if(e && e.target.value === '') {
           this.currencyToBuyAmount = 1;
         }
 
-        axios.get(`api/exchange-rates/${this.baseCurrency}-${this.currencyToBuy}`)
+        axios.get(`api/cost-calculation/${this.baseCurrency}/${this.currencyToBuy}/${this.currencyToBuyAmount}`)
           .then(res => {
-            this.updateCost(res.data);
+            this.costInBaseCurrency = res.data.amount;
           })
           .catch(err => {
             console.log(err.response.data)
           });
-      },
-
-      updateCost(exchangeRate) {
-        this.costInBaseCurrency = parseInt(this.currencyToBuyAmount) / 
-                                  parseFloat(exchangeRate.amount)
       }
 
       //URADITI SUBMIT FORME I SNIMANJE U BAZU
