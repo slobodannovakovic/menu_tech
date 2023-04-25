@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\CurrencyEloquentRepository;
+use App\Repositories\ExchangeRateEloquentRepository;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\ExchangeRateRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             CurrencyRepositoryInterface::class,
             CurrencyEloquentRepository::class
+        );
+
+        $this->app->bind(
+            ExchangeRateRepositoryInterface::class,
+            ExchangeRateEloquentRepository::class
         );
     }
 

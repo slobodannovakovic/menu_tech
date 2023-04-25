@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\CurrencyController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\ExchangeRateController;
+use App\Http\Controllers\CostCalculationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('currencies', [CurrencyController::class, 'index']);
+
+Route::get('exchange-rates', [ExchangeRateController::class, 'index']);
+
+Route::get('exchange-rates/{currencyPair}', [
+    ExchangeRateController::class, 'show'
+]);
+
+Route::get('cost-calculation/{baseCurrency}/{purchaseCurrency}/{baseCurrencyAmount}', [
+    CostCalculationController::class, 'calculate'
+]);
