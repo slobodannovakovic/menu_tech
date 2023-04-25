@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\CostCalculationController;
@@ -27,3 +28,9 @@ Route::get('exchange-rates/{currencyPair}', [
 Route::get('cost-calculation/{baseCurrency}/{purchaseCurrency}/{baseCurrencyAmount}', [
     CostCalculationController::class, 'calculate'
 ]);
+
+Route::get('orders', [OrderController::class, 'index']);
+Route::get('orders/{order}', [OrderController::class, 'show']);
+Route::post('orders', [OrderController::class, 'store']);
+//Route::put('orders/{order}', [OrderController::class, 'update']);
+//Route::delete('orders/{order}', [OrderController::class, 'destroy']);

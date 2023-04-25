@@ -11,8 +11,8 @@ class Order extends Model
 
     protected $fillable = [
         'base_currency_amount',
-        'currency_lable',
-        'currancy_amount',
+        'currency_label',
+        'currency_amount',
         'exchange_rate',
         'surcharge_percentage',
         'surcharge_amount'
