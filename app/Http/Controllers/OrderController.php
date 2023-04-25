@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Repositories\Contracts\OrderRepositoryInterface;
-
-use function Symfony\Component\String\b;
 
 class OrderController extends Controller
 {
