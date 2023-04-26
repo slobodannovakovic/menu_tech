@@ -13,4 +13,6 @@ interface OrderRepositoryInterface
     public function show(int $orderId): ?Order;
 
     public function save(OrderData $data): Order;
+
+    public function update(int $orderId, OrderData $data): bool;
 }

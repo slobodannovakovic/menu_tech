@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedDecimal('surcharge_percentage');
             $table->unsignedDecimal('surcharge_amount', 12, 6);
             $table->unsignedDecimal('discount_percentage')->nullable();
-            $table->unsignedDecimal('discount_amount')->nullable();
+            $table->unsignedDecimal('discount_amount', 12, 6)->nullable();
             $table->timestamps();
         });
     }

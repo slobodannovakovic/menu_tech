@@ -23,4 +23,11 @@ class OrderEloquentRepository implements OrderRepositoryInterface
     {
         return Order::create($data->toArray());
     }
+
+    public function update(int $orderId, OrderData $data): bool
+    {
+        $order = $this->show($orderId);
+
+        return $order->update($data->toArray());
+    }
 }

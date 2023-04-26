@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\OrderCreatedEvent;
+use App\Listeners\ApplyOrderDiscountListener;
 use App\Listeners\SendOrderDetailsEmailListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -15,7 +16,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         OrderCreatedEvent::class => [
-            SendOrderDetailsEmailListener::class
+            SendOrderDetailsEmailListener::class,
+            ApplyOrderDiscountListener::class
         ]
         /* Registered::class => [
             SendEmailVerificationNotification::class,

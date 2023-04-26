@@ -5,9 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\OrderEloquentRepository;
 use App\Repositories\CurrencyEloquentRepository;
+use App\Repositories\DiscountEloquentRepository;
 use App\Repositories\ExchangeRateEloquentRepository;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\DiscountRepositoryInterface;
 use App\Repositories\Contracts\ExchangeRateRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -30,6 +32,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             OrderRepositoryInterface::class,
             OrderEloquentRepository::class
+        );
+
+        $this->app->bind(
+            DiscountRepositoryInterface::class,
+            DiscountEloquentRepository::class
         );
     }
 

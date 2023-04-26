@@ -35,7 +35,7 @@ class OrderController extends Controller
             )
         );
 
-        OrderCreatedEvent::dispatch($order);
+        OrderCreatedEvent::dispatch($order, $request);
 
         return response($order, 201);
     }
