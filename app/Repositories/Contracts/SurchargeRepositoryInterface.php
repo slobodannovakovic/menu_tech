@@ -2,12 +2,12 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Models\Currency;
+use App\Models\Surcharge;
 use Illuminate\Database\Eloquent\Collection;
 
-interface CurrencyRepositoryInterface
+interface SurchargeRepositoryInterface
 {
     public function all(): Collection;
 
-    public function findByName(string $name): ?Currency;
+    public function show(int $surchargeId): ?Surcharge;
 }

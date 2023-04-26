@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('base_currency_amount');
+            $table->unsignedDecimal('base_currency_amount', 12, 6);
             $table->string('currency_label')->index();
             $table->unsignedDecimal('currency_amount');
             $table->unsignedDecimal('exchange_rate', 12, 6);
             $table->unsignedDecimal('surcharge_percentage');
-            $table->unsignedDecimal('surcharge_amount');
+            $table->unsignedDecimal('surcharge_amount', 12, 6);
+            $table->unsignedDecimal('discount_percentage')->nullable();
+            $table->unsignedDecimal('discount_amount')->nullable();
             $table->timestamps();
         });
     }

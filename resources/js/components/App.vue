@@ -59,7 +59,15 @@
 
     methods: {
       submit() {
-        alert('submitting');
+        axios.post(`/api/orders`, {
+          currencyToBuy: this.currencyToBuy,
+          costInBaseCurrency: this.costInBaseCurrency,
+          currencyToBuyAmount: this.currencyToBuyAmount,
+          baseCurrency: this.baseCurrency
+        })
+        .then(res => {
+          console.log(res.data)
+        });
       },
 
       getCurrencies() {

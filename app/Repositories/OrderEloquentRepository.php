@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
+use App\Data\OrderData;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 
@@ -19,8 +19,8 @@ class OrderEloquentRepository implements OrderRepositoryInterface
         return Order::find($orderId);
     }
 
-    public function save(Request $request): Order
+    public function save(OrderData $data): Order
     {
-        return Order::create($request->all());
+        return Order::create($data->toArray());
     }
 }

@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Data\OrderData;
 use Illuminate\Http\Response;
+use App\Http\Requests\OrderControllerStoreRequest;
 use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\Contracts\CurrencyRepositoryInterface;
+use App\Repositories\Contracts\ExchangeRateRepositoryInterface;
 
 class OrderController extends Controller
 {
     public function __construct(
-        private OrderRepositoryInterface $orderRepository
+        private OrderRepositoryInterface $orderRepository,
+        private ExchangeRateRepositoryInterface $exchangeRateRepository,
+        private CurrencyRepositoryInterface $currencyRepository
     ) {}
 
     public function index(): Response
@@ -19,9 +24,17 @@ class OrderController extends Controller
         return response($orders, 200);
     }
 
-    public function store(Request $request): Response
+    public function store(OrderControllerStoreRequest $request): Response
     {
-        $order = $this->orderRepository->save($request);
+        $order = $this->orderRepository->save(
+            new OrderData(
+                $request,
+                $this->exchangeRateRepository,
+                $this->currencyRepository
+            )
+        );
+
+        //fire event here
 
         return response($order, 201);
     }

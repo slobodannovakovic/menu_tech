@@ -12,4 +12,9 @@ class CurrencyEloquentRepository implements CurrencyRepositoryInterface
     {
         return Currency::orderBy('name')->get();
     }
+
+    public function findByName(string $name): ?Currency
+    {
+        return Currency::firstWhere('name', $name);
+    }
 }

@@ -4,6 +4,9 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Database\Seeders\OrdersTableSeeder;
+use Database\Seeders\CurrenciesTableSeeder;
+use Database\Seeders\SurchargesTableSeeder;
+use Database\Seeders\ExchangeRatesTableSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrderControllerTest extends TestCase
@@ -14,6 +17,9 @@ class OrderControllerTest extends TestCase
     {
         parent::setUp();
 
+        $this->seed(CurrenciesTableSeeder::class);
+        $this->seed(ExchangeRatesTableSeeder::class);
+        $this->seed(SurchargesTableSeeder::class);
         $this->seed(OrdersTableSeeder::class);
     }
 
@@ -56,12 +62,10 @@ class OrderControllerTest extends TestCase
     public function can_create_order(): void
     {
         $response = $this->postJson('/api/orders', [
-            'base_currency_amount' => 113.0107,
-            'currency_label' => 'EUR',
-            'currency_amount' => 100,
-            'exchange_rate' => 0.884872,
-            'surcharge_percentage' => 5,
-            'surcharge_amount' => 118.6612
+            'currencyToBuy' => 'eur',
+            'costInBaseCurrency' => 118.6612,
+            'currencyToBuyAmount' => 100,
+            'baseCurrency' => 'usd'
         ]);
 
         $orders = $this->getJson('/api/orders');

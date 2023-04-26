@@ -25,7 +25,7 @@ Route::get('exchange-rates/{currencyPair}', [
     ExchangeRateController::class, 'show'
 ]);
 
-Route::get('cost-calculation/{baseCurrency}/{purchaseCurrency}/{baseCurrencyAmount}', [
+Route::get('cost-calculation/{baseCurrency}/{purchaseCurrency}/{purchaseCurrencyAmount}', [
     CostCalculationController::class, 'calculate'
 ]);
 

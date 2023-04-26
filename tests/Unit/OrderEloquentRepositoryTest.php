@@ -4,11 +4,18 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Models\Order;
+use App\Data\OrderData;
+use Illuminate\Http\Request;
 use Database\Seeders\OrdersTableSeeder;
+use Database\Seeders\CurrenciesTableSeeder;
+use Database\Seeders\SurchargesTableSeeder;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\OrderEloquentRepository;
+use Database\Seeders\ExchangeRatesTableSeeder;
+use App\Repositories\CurrencyEloquentRepository;
+use App\Http\Requests\OrderControllerStoreRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
+use App\Repositories\ExchangeRateEloquentRepository;
 
 class OrderEloquentRepositoryTest extends TestCase
 {
@@ -18,6 +25,9 @@ class OrderEloquentRepositoryTest extends TestCase
     {
         parent::setUp();
 
+        $this->seed(CurrenciesTableSeeder::class);
+        $this->seed(ExchangeRatesTableSeeder::class);
+        $this->seed(SurchargesTableSeeder::class);
         $this->seed(OrdersTableSeeder::class);
     }
 
@@ -50,19 +60,22 @@ class OrderEloquentRepositoryTest extends TestCase
     public function creates_order(): void
     {
         $requestParams = [
-            'base_currency_amount' => 113.0107,
-            'currency_label' => 'EUR',
-            'currency_amount' => 100,
-            'exchange_rate' => 0.884872,
-            'surcharge_percentage' => 5,
-            'surcharge_amount' => 118.6612
+            'currencyToBuy' => 'eur',
+            'costInBaseCurrency' => 118.6612,
+            'currencyToBuyAmount' => 100,
+            'baseCurrency' => 'usd'
         ];
 
-        $request = new Request($requestParams);
+        $request = new OrderControllerStoreRequest($requestParams);
+        $orderData = new OrderData(
+            $request,
+            new ExchangeRateEloquentRepository,
+            new CurrencyEloquentRepository
+        );
 
-        $order = (new OrderEloquentRepository)->save($request);
+        $order = (new OrderEloquentRepository)->save($orderData);
 
         $this->assertInstanceOf(Order::class, $order);
-        $this->assertSame(113.0107, $order->base_currency_amount);
+        $this->assertSame(118.6612, $order->base_currency_amount);
     }
 }

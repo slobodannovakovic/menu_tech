@@ -15,6 +15,8 @@ class Order extends Model
         'currency_amount',
         'exchange_rate',
         'surcharge_percentage',
-        'surcharge_amount'
+        'surcharge_amount',
+        'discount_percentage',
+        'discount_amount'
     ];
 }

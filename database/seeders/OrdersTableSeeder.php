@@ -19,7 +19,9 @@ class OrdersTableSeeder extends Seeder
             'currency_amount' => 100,
             'exchange_rate' => 0.884872,
             'surcharge_percentage' => 5,
-            'surcharge_amount' => 118.6612
+            'surcharge_amount' => 5.6505,
+            'discount_percentage' => 2.00,
+            'discount_amount' => 2.3732
         ]);
     }
 }

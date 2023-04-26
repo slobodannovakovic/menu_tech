@@ -14,13 +14,13 @@ class CostCalculationController extends Controller
     public function calculate(
         string $baseCurrency,
         string $purchaseCurrency,
-        int $baseCurrencyAmount
+        int $purchaseCurrencyAmount
     ): Response
     {
         $cost = $this->costCalculationService->calculate(
                     $baseCurrency,
                     $purchaseCurrency,
-                    $baseCurrencyAmount
+                    $purchaseCurrencyAmount
                 );
 
         if(is_null($cost)) {
