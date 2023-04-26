@@ -98,10 +98,6 @@
             console.log(err.response.data)
           });
       }
-
-      //URADITI SUBMIT FORME I SNIMANJE U BAZU
-      //VIDETI NA BACKENDU DA SE VRATE RESOURSE-I
-      //TASK ZA CRON - EXCHANGE API I UPDATE BAZE
     }
   }
 
