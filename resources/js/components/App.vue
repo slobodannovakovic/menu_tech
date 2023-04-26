@@ -66,7 +66,11 @@
           baseCurrency: this.baseCurrency
         })
         .then(res => {
-          console.log(res.data)
+          if(res.status === 200 || res.status === 201) {
+            alert('Order successfuly created. Thank you.');
+          } else {
+            alert('Sorry, something went wrong.');
+          }
         });
       },
 
