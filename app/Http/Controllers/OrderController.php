@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data\OrderData;
 use Illuminate\Http\Response;
+use App\Events\OrderCreatedEvent;
 use App\Http\Requests\OrderControllerStoreRequest;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\CurrencyRepositoryInterface;
@@ -34,7 +35,7 @@ class OrderController extends Controller
             )
         );
 
-        //fire event here
+        OrderCreatedEvent::dispatch($order);
 
         return response($order, 201);
     }

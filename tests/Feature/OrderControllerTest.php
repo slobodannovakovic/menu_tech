@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Events\OrderCreatedEvent;
+use Illuminate\Support\Facades\Event;
 use Database\Seeders\OrdersTableSeeder;
 use Database\Seeders\CurrenciesTableSeeder;
 use Database\Seeders\SurchargesTableSeeder;
@@ -72,5 +74,20 @@ class OrderControllerTest extends TestCase
         
         $response->assertStatus(201);
         $orders->assertJsonCount(2);
+    }
+
+    /** @test */
+    public function dispathes_event_after_order_created(): void
+    {
+        Event::fake();
+
+        $this->postJson('/api/orders', [
+            'currencyToBuy' => 'eur',
+            'costInBaseCurrency' => 118.6612,
+            'currencyToBuyAmount' => 100,
+            'baseCurrency' => 'usd'
+        ]);
+
+        Event::assertDispatched(OrderCreatedEvent::class);
     }
 }
