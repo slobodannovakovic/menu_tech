@@ -25,4 +25,13 @@ class ExchangeRateEloquentRepository implements ExchangeRateRepositoryInterface
                                 'base_currency', 'purchase_currency', 'amount'
                             ]);
     }
+
+    public function update(string $baseCurrency, string $purchaseCurrency, array $data): void
+    {
+        $exchangeRate = ExchangeRate::where('base_currency', $baseCurrency)
+                                    ->where('purchase_currency', $purchaseCurrency)
+                                    ->first();
+
+        $exchangeRate->update($data);
+    }
 }

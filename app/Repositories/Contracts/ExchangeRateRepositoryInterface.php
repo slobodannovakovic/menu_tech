@@ -10,4 +10,6 @@ interface ExchangeRateRepositoryInterface
     public function all(): Collection;
 
     public function show(string $baseCurrency, string $purchaseCurrency): ?ExchangeRate;
+
+    public function update(string $baseCurrency, string $purchaseCurrency, array $data): void;
 }

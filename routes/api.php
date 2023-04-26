@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\CostCalculationController;
+use App\Services\HttpService;
 
 /*
 |--------------------------------------------------------------------------
