@@ -16,10 +16,9 @@ class GetExchangeRates implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct() {}
+    public $tries = 3;
+
+    public $backoff = 3;
 
     /**
      * Execute the job.
