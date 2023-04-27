@@ -60,7 +60,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ## Get exchange rates from external API
 
-This will go to the external API, fetch currency exchange rates and save them to local database.
+This will fire background job which will go to the external API, fetch currency exchange rates and save them to local database.
 
 - Fire up scheduler ```php artisan schedule:run```
 - To keep the schedule worker running ```php artisan schedule:work```
