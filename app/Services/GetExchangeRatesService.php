@@ -13,8 +13,8 @@ class GetExchangeRatesService
     ): void
     {
         $exchangeRates = $httpService->get(
-            'https://api.apilayer.com/currency_data/live',
-            'source=USD&currencies=EUR%2CGBP%2CJPY&apikey=NUw93cpGEiDJp5rX1v5RkZofIAsXtz4Q'
+            config('currencylayer.baseUrl'),
+            'source=USD&currencies=EUR%2CGBP%2CJPY&apikey='.config('currencylayer.apikey')
         );
 
         foreach($exchangeRates['quotes'] as $rate => $amount) {
