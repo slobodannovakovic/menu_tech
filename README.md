@@ -51,6 +51,11 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 - Configure queue connection ```QUEUE_CONNECTION=database```
 
+## Config files
+
+- Configuration for sending emails after order has been created can be found in ```config/order.php``` file.
+- Configuration for currencylayer API CAN can be found in ```config/currenylayer.php``` file.
+
 ## Running the Application
 
 - Setup the front ```npm run dev```
