@@ -6,7 +6,7 @@ use App\Models\Surcharge;
 use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\Contracts\SurchargeRepositoryInterface;
 
-class SurchargeRepository implements SurchargeRepositoryInterface
+class SurchargeEloquentRepository implements SurchargeRepositoryInterface
 {
     public function all(): Collection
     {

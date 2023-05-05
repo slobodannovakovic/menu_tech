@@ -17,16 +17,9 @@ This is a simple currency exchange rate application. You can select to purchase 
 - PHP version 8.1 or latest
 - MySql
 
-## Installation
-
-- Clone the app from [Git Hub](https://github.com/slobodannovakovic/menu_tech).
-- To install PHP dependencies run ```composer install```
-- To install JS dependencies run ```npm install```
-- Run migrations ```php artisan migrate```
-- Run seeders ```php artisan db:seed```
-
 ## Setting .env file
 
+- Duplicate .env.example file and name it .env
 - Configure DB settings
 ```
 DB_CONNECTION=mysql
@@ -50,6 +43,19 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 - Configure queue connection ```QUEUE_CONNECTION=database```
+
+# Database
+
+- Create local database with the same name as specified in .env file
+
+## Installation
+
+- Clone the app from [Git Hub](https://github.com/slobodannovakovic/menu_tech).
+- To install PHP dependencies run ```composer install```
+- To install JS dependencies run ```npm install```
+- To generate app key run ```php artisan key:generate```
+- Run migrations ```php artisan migrate```
+- Run seeders ```php artisan db:seed```
 
 ## Config files
 
