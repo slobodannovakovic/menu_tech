@@ -17,6 +17,10 @@ This is a simple currency exchange rate application. You can select to purchase 
 - PHP version 8.1 or latest
 - MySql
 
+## Get the app from Github
+
+- Clone the app from [Git Hub](https://github.com/slobodannovakovic/menu_tech).
+
 ## Setting .env file
 
 - Duplicate .env.example file and name it .env
@@ -44,13 +48,12 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 - Configure queue connection ```QUEUE_CONNECTION=database```
 
-# Database
+## Database
 
 - Create local database with the same name as specified in .env file
 
 ## Installation
 
-- Clone the app from [Git Hub](https://github.com/slobodannovakovic/menu_tech).
 - To install PHP dependencies run ```composer install```
 - To install JS dependencies run ```npm install```
 - To generate app key run ```php artisan key:generate```
